@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    tools:ignore="ExtraText">
+
+    <!-- APP TITLE -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emoji Login 🔐"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- STATUS TEXT -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select 4 emojis"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- EMOJI GRID -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/btnEmoji1"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:text="😀"
+            android:textSize="30sp"
+            android:layout_margin="8dp" />
+
+        <Button
+            android:id="@+id/btnEmoji2"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:text="🔥"
+            android:textSize="30sp"
+            android:layout_margin="8dp" />
+
+        <Button
+            android:id="@+id/btnEmoji3"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:text="❤️"
+            android:textSize="30sp"
+            android:layout_margin="8dp" />
+
+        <Button
+            android:id="@+id/btnEmoji4"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:text="😎"
+            android:textSize="30sp"
+            android:layout_margin="8dp" />
+
+    </GridLayout>
+
+    <!-- ✅ DAY 4 : FILE SELECTION BUTTON -->
+    <Button
+        android:id="@+id/btnSelectFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Image / Document 📁"
+        android:layout_marginTop="10dp" />
+    android : enabled = " false " />
+
+    <Button
+        android:id="@+id/btnRestore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restore Backup"
+        android:layout_marginTop="10dp"/>
+
+    <!-- RESET BUTTON -->
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset Password"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
