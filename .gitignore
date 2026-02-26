@@ -13,3 +13,19 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Android
+*.iml
+.gradle
+/local.properties
+/.idea
+/.idea/*
+/build
+/captures
+.externalNativeBuild
+
+# APK / Outputs
+*.apk
+*.aab
+
+# Logs
+*.log
