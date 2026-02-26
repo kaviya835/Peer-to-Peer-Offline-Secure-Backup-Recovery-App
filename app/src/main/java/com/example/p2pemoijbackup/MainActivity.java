@@ -1,5 +1,6 @@
 package com.example.p2pemoijbackup;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PASSWORD_LENGTH = 4;
     private static final int FILE_PICK_CODE = 101;
-
-    private Uri selectedFileUri;
-    private byte[] selectedFileBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ================= AUTH UI =================
+    @SuppressLint("SetTextI18n")
     private void setAuthenticatedUI(boolean isAuth) {
         emojiBtn1.setEnabled(!isAuth);
         emojiBtn2.setEnabled(!isAuth);
@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(req, res, data);
 
         if (req == FILE_PICK_CODE && res == RESULT_OK && data != null) {
-            selectedFileUri = data.getData();
-            selectedFileBytes = readFileFromUri(selectedFileUri);
+            Uri selectedFileUri = data.getData();
+            byte[] selectedFileBytes = readFileFromUri(selectedFileUri);
             saveOfflineBackup(selectedFileBytes);
         }
     }
@@ -192,7 +192,11 @@ public class MainActivity extends AppCompatActivity {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             byte[] data = new byte[1024];
             int n;
-            while ((n = is.read(data)) != -1) buffer.write(data, 0, n);
+            while (true) {
+                assert is != null;
+                if ((n = is.read(data)) == -1) break;
+                buffer.write(data, 0, n);
+            }
             is.close();
             return buffer.toByteArray();
         } catch (Exception e) {
@@ -257,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
     private String sha256(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(input.getBytes("UTF-8"));
+            byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
             for (byte b : hash)
                 sb.append(String.format("%02x", b));
